@@ -1,32 +1,28 @@
-import { combineRgb } from '@companion-module/base'
 import type { ModuleInstance } from './main.js'
+import { Image } from './images.js'
 
 export function UpdateFeedbacks(self: ModuleInstance): void {
 	self.setFeedbackDefinitions({
-		ChannelState: {
-			name: 'Example Feedback',
+		RecordingState: {
+			name: 'Recording Status',
 			type: 'boolean',
 			defaultStyle: {
-				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
+				png64: Image.VorRed,
 			},
-			options: [
-				{
-					id: 'num',
-					type: 'number',
-					label: 'Test',
-					default: 5,
-					min: 0,
-					max: 10,
-				},
-			],
-			callback: (feedback) => {
-				console.log('Hello world!', feedback.options.num)
-				if (Number(feedback.options.num) > 5) {
-					return true
-				} else {
-					return false
-				}
+			options: [],
+			callback: () => {
+				return !!self.getVariableValue('recordingState')
+			},
+		},
+		RecordingPulse: {
+			name: 'Recording Pulse',
+			type: 'boolean',
+			defaultStyle: {
+				png64: Image.VorRed,
+			},
+			options: [],
+			callback: () => {
+				return (Number(self.getVariableValue('recordingPulse')) / 255) * 100 > 50
 			},
 		},
 	})

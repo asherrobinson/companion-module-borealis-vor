@@ -1,6 +1,6 @@
 {
-	"name": "your-module-name",
-	"version": "0.1.0",
+	"name": "borealis-vor",
+	"version": "v0.1.0-beta",
 	"main": "dist/main.js",
 	"type": "module",
 	"scripts": {
@@ -16,14 +16,15 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/bitfocus/companion-module-your-module-name.git"
+		"repository": "git+https://github.com/asherrobinson/companion-module-borealis-vor"
 	},
 	"engines": {
 		"node": "^22.14",
 		"yarn": "^4"
 	},
 	"dependencies": {
-		"@companion-module/base": "~1.11.3"
+		"@companion-module/base": "~1.11.3",
+		"ts-osc": "^0.3.2"
 	},
 	"devDependencies": {
 		"@companion-module/tools": "^2.3.0",

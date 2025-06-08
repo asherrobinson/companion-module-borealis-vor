@@ -1,16 +1,16 @@
 {
-	"id": "your-module-name",
-	"name": "your-module-name",
-	"shortname": "module-shortname",
-	"description": "A short one line description of your module",
-	"version": "0.0.0",
+	"id": "borealis-vor",
+	"name": "borealis-vor",
+	"shortname": "vor",
+	"description": "Simplify control of the Vor Recording software by Borealis Solutions",
+	"version": "0.1.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-your-module-name.git",
-	"bugs": "https://github.com/bitfocus/companion-module-your-module-name/issues",
+	"repository": "git+https://github.com/asherrobinson/companion-module-borealis-vor",
+	"bugs": "https://github.com/asherrobinson/companion-module-borealis-vor/issues",
 	"maintainers": [
 		{
-			"name": "Your name",
-			"email": "Your email"
+			"name": "Asher Robinson",
+			"email": "software@discopixel.net"
 		}
 	],
 	"runtime": {
@@ -20,7 +20,7 @@
 		"entrypoint": "../dist/main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "Your company",
-	"products": ["Your product"],
+	"manufacturer": "Borealis Solutions",
+	"products": ["Vor"],
 	"keywords": []
 }

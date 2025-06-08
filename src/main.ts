@@ -1,9 +1,10 @@
-import { InstanceBase, runEntrypoint, InstanceStatus, SomeCompanionConfigField } from '@companion-module/base'
-import { GetConfigFields, type ModuleConfig } from './config.js'
-import { UpdateVariableDefinitions } from './variables.js'
+import { InstanceBase, InstanceStatus, runEntrypoint, SomeCompanionConfigField } from '@companion-module/base'
+import { GetConfigFields, type ModuleConfig, validateConfig } from './config.js'
+import { destroyVariableUpdaters, UpdateVariableDefinitions } from './variables.js'
 import { UpgradeScripts } from './upgrades.js'
 import { UpdateActions } from './actions.js'
 import { UpdateFeedbacks } from './feedbacks.js'
+import { UpdatePresets } from './presets.js'
 
 export class ModuleInstance extends InstanceBase<ModuleConfig> {
 	config!: ModuleConfig // Setup in init()
@@ -20,14 +21,23 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		this.updateActions() // export actions
 		this.updateFeedbacks() // export feedbacks
 		this.updateVariableDefinitions() // export variable definitions
+		this.updatePresetDefinitions()
+
+		validateConfig(this)
+
+		setInterval(() => {
+			this.checkFeedbacks()
+		}, 440)
 	}
 	// When module gets deleted
 	async destroy(): Promise<void> {
 		this.log('debug', 'destroy')
+		destroyVariableUpdaters()
 	}
 
 	async configUpdated(config: ModuleConfig): Promise<void> {
 		this.config = config
+		validateConfig(this)
 	}
 
 	// Return config fields for web config
@@ -45,6 +55,10 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 
 	updateVariableDefinitions(): void {
 		UpdateVariableDefinitions(this)
+	}
+
+	updatePresetDefinitions(): void {
+		UpdatePresets(this)
 	}
 }
 
