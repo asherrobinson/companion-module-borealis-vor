@@ -7,10 +7,10 @@
 export enum OSCString {
 	BASE = '/vor/',
 
-	REC_START = 'record/start/',
-	REC_STOP = 'record/stop/',
-	REC_TOGGLE = 'record/toggle/',
-	SNAPSHOT = 'record/snapshot/',
+	REC_START = 'record/start',
+	REC_STOP = 'record/stop',
+	REC_TOGGLE = 'record/toggle',
+	SNAPSHOT = 'record/snapshot',
 
 	SHOW_NAME = 'showname/set',
 	SHOW_NUM = 'shownumber/set',
