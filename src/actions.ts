@@ -17,7 +17,7 @@ export function UpdateActions(self: ModuleInstance): void {
 			name: 'Stop Recording',
 			options: [],
 			callback: async () => {
-				sendSimpleMessage(MessageType.RecStart, self)
+				sendSimpleMessage(MessageType.RecStop, self)
 			},
 		},
 
