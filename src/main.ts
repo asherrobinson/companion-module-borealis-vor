@@ -24,10 +24,6 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		this.updatePresetDefinitions()
 
 		validateConfig(this)
-
-		setInterval(() => {
-			this.checkFeedbacks()
-		}, 440)
 	}
 	// When module gets deleted
 	async destroy(): Promise<void> {

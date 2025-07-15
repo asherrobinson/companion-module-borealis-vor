@@ -3,10 +3,10 @@
 	"name": "borealis-vor",
 	"shortname": "vor",
 	"description": "Simplify control of the Vor Recording software by Borealis Solutions",
-	"version": "v0.2.0",
+	"version": "0.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/asherrobinson/companion-module-borealis-vor",
-	"bugs": "https://github.com/asherrobinson/companion-module-borealis-vor/issues",
+	"repository": "git+https://github.com/bitfocus/companion-module-borealis-vor",
+	"bugs": "https://github.com/bitfocus/companion-module-borealis-vor/issues",
 	"maintainers": [
 		{
 			"name": "Asher Robinson",
@@ -22,5 +22,5 @@
 	"legacyIds": [],
 	"manufacturer": "Borealis Solutions",
 	"products": ["Vor"],
-	"keywords": []
+	"keywords": ["borealis", "vor", "recording", "osc"]
 }

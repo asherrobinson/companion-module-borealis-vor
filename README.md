@@ -8,7 +8,7 @@ See [HELP.md](./companion/HELP.md) and [LICENSE](./LICENSE)
 
 **Want to know how to use this module?** Check out [HELP.md](./companion/HELP.md) for details on the companion side of things, and visit [Vor's documentation](https://docs.getvor.app/) for details on the software itself!
 
-**Experiencing an issue with this module or have a suggestion?** Talk about it [here](https://github.com/asherrobinson/companion-module-borealis-vor/issues)
+**Experiencing an issue with this module or have a suggestion?** Talk about it [here](https://github.com/bitfocus/companion-module-borealis-vor/issues)
 
 ## Developers
 

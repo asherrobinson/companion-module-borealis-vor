@@ -32,14 +32,8 @@ export default class sACNReceiver {
         localInterfaceIP   : '',
     }
 
-    #stats = {
-        updateCount : 0
-    }
-
     #listener:Socket
-    #isAlive:boolean = false
     #state:boolean = false
-    #staleTimer:NodeJS.Timeout | undefined = undefined
     #reSubTimer:NodeJS.Timeout
 
     #universes:sACNUniverse[]
@@ -60,8 +54,6 @@ export default class sACNReceiver {
     constructor (localInterfaceIP: string, options?:object) {
 
         options = options || {};
-
-        this.#isAlive = false;
 
         this.#config = {
             ...this.#config,
@@ -105,18 +97,6 @@ export default class sACNReceiver {
         listener.on('message', (msg:Buffer) => {
 
             this.#sacnMessageHandler(msg);
-
-            this.#stats.updateCount++;
-            this.#isAlive = true;
-
-            clearTimeout(this.#staleTimer);
-            this.#staleTimer = setTimeout(() => {
-
-                // console.error('[ERROR] sACN data stale! Haven\'t received in 5+ seconds on local interface ' + this.#config.localInterfaceIP);
-                this.#isAlive = false;
-
-            }, this.#config.staleTimeout);
-
         });
 
         listener.on('listening', () => {
@@ -142,13 +122,6 @@ export default class sACNReceiver {
 
         return listener;
     }
-
-    // #restartACNClient = () => {
-    //
-    //     console.log('Retrying client start...');
-    //     this.#storage.listener.close();
-    //     this.#startACNClient();
-    // }
 
     #resubscribeAll = () => {
 
@@ -236,27 +209,7 @@ export default class sACNReceiver {
                 return;
             }
 
-            // @ts-expect-error idk
-            this.#universes[parsedData.universe] = parsedData.data;
-
-            this.#stats.updateCount++;
-            this.#isAlive = true;
-
-            clearTimeout(this.#staleTimer);
-
-            this.#staleTimer = setTimeout(() => {
-
-                this.#isAlive = false;
-                console.warn('[WARN] sACN data stale! Haven\'t received in 5+ seconds');
-
-                Object.keys(this.#universes).forEach((key) => {
-                    // @ts-expect-error idk
-                    this.#universes[key] = [];
-                });
-
-                this.#priorities = [];
-
-            }, this.#config.staleTimeout);
+            this.#universes[parsedData.universe] = parsedData;
         }
 
         //Ignore all others
@@ -300,9 +253,6 @@ export default class sACNReceiver {
 
             DMXVals.push(bytes.readUInt8(firstAddrOffset + i));
         }
-
-        // Debug sACN message structure
-        // console.log(`Univ: ${universe} Priority: ${priority} StartCode: ${startCode} First Val: ${DMXVals[0]}`);
 
         return {
             universe : universe,
@@ -367,50 +317,6 @@ export default class sACNReceiver {
 
         return Object.prototype.hasOwnProperty.call(this.#universes, universe) ? this.#universes[universe] : false;
     }
-
-
-    // --------------------
-    // ----- STATS --------
-    // --------------------
-
-    /**
-     * Reset all statistics on this receiver
-     */
-    resetStats (): void {
-
-        this.#stats.updateCount = 0;
-    }
-
-    /**
-     * Get all available statistics
-     * @return {{updateCount: number}}
-     */
-    getStats  (): object {
-
-        return this.#stats;
-    }
-
-    /**
-     * Convenience method to return all available stats and reset counters
-     *
-     * @return {{updateCount: number}}
-     */
-    getAndResetStats (): object {
-
-        const statsToReturn = {
-            ...this.getStats()
-        };
-
-        this.resetStats();
-
-        return statsToReturn
-    }
-
-    getStatus () :boolean {
-
-        return this.#isAlive;
-    }
-
 }
 
 
