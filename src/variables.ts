@@ -18,11 +18,8 @@ export function UpdateVariableDefinitions(self: ModuleInstance): void {
 			receiver.addUniverse(self.config.sacn_universe)
 			updateInterval = setInterval(() => {
 				updateVariables(self)
+				self.checkFeedbacks()
 			}, 220)
-
-			setInterval(() => {
-				self.log('debug', 'sACN Receiver: ' + JSON.stringify(receiver.getAndResetStats()))
-			}, 5000)
 		} catch (e: any) {
 			self.log('warn', 'Failed to start sACN listener')
 			self.log('debug', e.toString())
@@ -37,8 +34,7 @@ function updateVariables(self: ModuleInstance): void {
 		const univData = receiver.getUniverseData(self.config.sacn_universe)
 
 		if (univData) {
-			// @ts-expect-error there's a weird type problem here
-			const currentVorVal = univData[0]
+			const currentVorVal = univData.data[0]
 
 			if (lastStatusValue === currentVorVal) {
 				consecutiveValueCount++
