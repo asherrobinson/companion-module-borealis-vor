@@ -3,7 +3,7 @@
 	"name": "borealis-vor",
 	"shortname": "vor",
 	"description": "Simplify control of the Vor Recording software by Borealis Solutions",
-	"version": "0.1.0",
+	"version": "v0.2.0",
 	"license": "MIT",
 	"repository": "git+https://github.com/asherrobinson/companion-module-borealis-vor",
 	"bugs": "https://github.com/asherrobinson/companion-module-borealis-vor/issues",

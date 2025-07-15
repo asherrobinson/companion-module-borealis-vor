@@ -1,6 +1,6 @@
 {
 	"name": "borealis-vor",
-	"version": "v0.1.0-beta",
+	"version": "v0.2.0",
 	"main": "dist/main.js",
 	"type": "module",
 	"scripts": {
