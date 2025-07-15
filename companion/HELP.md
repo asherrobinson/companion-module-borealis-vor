@@ -40,4 +40,4 @@ Presets are available to simplify the most common tasks. Start with these helpfu
 
 ### Examples
 
-<img alt="Companion Vor Button Examples" src="https://github.com/asherrobinson/companion-module-borealis-vor/blob/main/resources/examples.png" />
+![Example](images/examples.png 'Example')
